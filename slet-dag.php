@@ -28,7 +28,7 @@ $rowDay = mysqli_fetch_assoc($day)
                 </div>
                 <div class="flex">
                     <h3>
-                        <?php $date = $rowDays['dato'];
+                        <?php $date = $rowDay['dato'];
                         $dato = new DateTime("$date");
                         echo $dato->format('d-m-Y');
                         ?>

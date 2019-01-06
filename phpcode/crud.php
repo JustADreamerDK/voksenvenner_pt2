@@ -51,42 +51,42 @@ function getVen($venskabsId, $type){
 
 function getDayById($venskab_id){
     global $objCon;
-    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id` FROM `dag` WHERE `venskabs_id` = '$venskab_id'";
+    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id`, `bruges_mor`, `bruges_ven` FROM `dag` WHERE `venskabs_id` = '$venskab_id'";
     $result = $objCon->query($sql);
     return $result;
 }
 
 function getDay($id){
     global $objCon;
-    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id` FROM `dag` WHERE `id` = '$id'";
+    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id`, `bruges_mor`, `bruges_ven` FROM `dag` WHERE `id` = '$id'";
     $result = $objCon->query($sql);
     return $result;
 }
 
 function getDays(){
     global $objCon;
-    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id` FROM `dag` ORDER BY `dato` DESC";
+    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id`, `bruges_mor`, `bruges_ven` FROM `dag` ORDER BY `dato` DESC";
     $result = $objCon->query($sql);
     return $result;
 }
 
 function getLastDay(){
     global $objCon;
-    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id` FROM `dag` ORDER BY `id` DESC";
+    $sql = "SELECT `id`, `dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id`, `bruges_mor`, `bruges_ven` FROM `dag` ORDER BY `id` DESC";
     $result = $objCon->query($sql);
     return $result;
 }
 
 function getPictures($id){
     global $objCon;
-    $sql = "SELECT `id`, `filnavn`, `bruges_mor`, `bruges_ven`, `dag_id` FROM `billede` WHERE `dag_id` = '$id'";
+    $sql = "SELECT `id`, `filnavn`, `dag_id` FROM `billede` WHERE `dag_id` = '$id'";
     $result = $objCon->query($sql);
     return $result;
 }
 
 function getPicture($id){
     global $objCon;
-    $sql = "SELECT `id`, `filnavn`, `bruges_mor`, `bruges_ven`, `dag_id` FROM `billede` WHERE `id` = '$id'";
+    $sql = "SELECT `id`, `filnavn`, `dag_id` FROM `billede` WHERE `id` = '$id'";
     $result = $objCon->query($sql);
     return $result;
 }
@@ -114,7 +114,7 @@ function createBarn($fornavn, $efternavn, $fodselsdag, $bruger_id){
 
 function createDay($dato, $lokation, $overskrift, $beskrivelse, $venskab_id){
     global $objCon;
-    $sql = "INSERT INTO `dag`(`dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id`) VALUES ('$dato', '$lokation', '$overskrift', '$beskrivelse', '$venskab_id')";
+    $sql = "INSERT INTO `dag`(`dato`, `lokation`, `overskrift`, `beskrivelse`, `venskabs_id`, `bruges_mor`, `bruges_ven`) VALUES ('$dato', '$lokation', '$overskrift', '$beskrivelse', '$venskab_id', '1', '1')";
     $result = $objCon->query($sql);
     return $result;
 }
@@ -129,6 +129,20 @@ function createPicture($filnavn, $dag){
 function updateDay($id, $dato, $lokation, $overskrift, $beskrivelse){
     global $objCon;
     $sql = "UPDATE `dag` SET `dato`='$dato',`lokation`='$lokation',`overskrift`='$overskrift',`beskrivelse`='$beskrivelse' WHERE `id`='$id'";
+    $result = $objCon->query($sql);
+    return $result;
+}
+
+function updateAcceptMom($accept, $id){
+    global $objCon;
+    $sql = "UPDATE `dag` SET `bruges_mor`='$accept' WHERE `id`='$id'";
+    $result = $objCon->query($sql);
+    return $result;
+}
+
+function updateAcceptFriend($accept, $id){
+    global $objCon;
+    $sql = "UPDATE `dag` SET `bruges_ven`='$accept' WHERE `id`='$id'";
     $result = $objCon->query($sql);
     return $result;
 }

@@ -2,6 +2,7 @@
 session_start();
 include "include/connect.php";
 include "phpcode/crud.php";
+$type = $_SESSION['brugertype'];
 $venskab = getFriendships();
 ?>
 

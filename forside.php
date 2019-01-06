@@ -48,15 +48,15 @@ $limit = 5;
                 <div class="special w-80 m-t-50 p-25">
                     <div class="flex between w-100">
                         <div>
-                            <h3 class="bold"><?php echo $rowDays['overskrift']; ?></h3>
+                            <h4 class="bold"><?php echo $rowDays['overskrift']; ?></h4>
                         </div>
                         <div class="flex">
-                            <h3>
+                            <h4>
                                 <?php $date = $rowDays['dato'];
                                 $dato = new DateTime("$date");
                                 echo $dato->format('d-m-Y');
                                 ?>
-                            </h3>
+                            </h4>
                         </div>
                     </div>
                     <a href="read-more.php?id=<?php echo $rowDays['id']; ?>">
@@ -78,6 +78,12 @@ $limit = 5;
                         Læs mere
                         </h4>
                     </a>
+                    <?php if ($rowDays['bruges_mor'] == '2' && $rowDays['bruges_ven'] == '2'){
+                        ?>
+                        <h6 class="m-t-10 light cursive">Denne dag må bruges til markedsføring</h6>
+                        <?php
+                    } ?>
+
                     </div>
                     <?php
                 }}
@@ -100,16 +106,16 @@ $limit = 5;
                         <div class="special w-80 m-t-50 p-25">
                             <div class="flex between w-100">
                                 <div>
-                                    <h3 class="bold"><?php echo $rowDay['overskrift']; ?></h3>
+                                    <h4 class="bold"><?php echo $rowDay['overskrift']; ?></h4>
                                 </div>
                                 <div class="flex">
-                                    <h3>
+                                    <h4>
                                         <?php $date = $rowDay['dato'];
                                         $dato = new DateTime("$date");
                                         echo $dato->format('d-m-Y');
                                         ?>
-                                    </h3>
-                                    <h3 class="p-l-30" id="aaben<?php echo $i; ?>">⋮</h3>
+                                    </h4>
+                                    <h4 class="p-lr-30 mini-knap" id="aaben<?php echo $i; ?>">⋮</h4>
                                 </div>
                             </div>
                             <div class="flex-column right">
